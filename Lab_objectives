@@ -6,7 +6,7 @@ Build and secure a CI/CD pipeline for deploying a containerized microservice to 
 
 ---
 
-## Technologies You'll Use
+## Technologies explored
 
 * **Source Control**: GitHub
 * **CI/CD**: GitHub Actions or Jenkins
