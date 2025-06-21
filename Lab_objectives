@@ -1,0 +1,97 @@
+##  DevSecOps CI/CD Lab: Secure Microservice Delivery on Kubernetes
+
+### Goal
+
+Build and secure a CI/CD pipeline for deploying a containerized microservice to Kubernetes using DevSecOps tools and best practices.
+
+---
+
+## Technologies You'll Use
+
+* **Source Control**: GitHub
+* **CI/CD**: GitHub Actions or Jenkins
+* **Build**: Docker
+* **Container Registry**: Harbor (self-hosted) or GitHub Container Registry
+* **Security Scanners**:
+
+  * SAST: SonarQube or CodeQL
+  * DAST: OWASP ZAP (optional)
+  * Container Scanning: Trivy
+  * Dependency Scanning: Snyk or Grype
+* **Kubernetes**: Minikube, Kind, or EKS (eventually)
+* **GitOps Deployment**: Argo CD
+* **Policy Enforcement**: OPA Gatekeeper or Kyverno
+* **Monitoring**: Falco (runtime security)
+
+---
+
+##  Pipeline Stages & Security Objectives
+
+| Stage      | Task                   | Tools                      | Security                            |
+| ---------- | ---------------------- | -------------------------- | ----------------------------------- |
+| 1. Dev     | Push code to GitHub    | Git                        | Pre-commit hooks (optional)         |
+| 2. Build   | Build Docker image     | Docker                     | Lint Dockerfile, scan image (Trivy) |
+| 3. Test    | Unit/integration tests | GitHub Actions / Jenkins   | Enforce test pass to continue       |
+| 4. Scan    | SAST, secrets, deps    | SonarQube, Trivy, Gitleaks | Fail on critical vulnerabilities    |
+| 5. Deploy  | Push to registry + K8s | ArgoCD, Helm               | Sign image (cosign), verify policy  |
+| 6. Runtime | Monitor & audit        | Falco, Prometheus          | Detect suspicious behavior in prod  |
+
+---
+
+##  Step-by-Step Setup
+
+###  Week 1: Environment Setup
+
+* Set up:
+
+  * GitHub repo
+  * Minikube or Kind cluster
+  * Docker & kubectl
+  * GitHub Actions runner (optional self-hosted)
+* Install:
+
+  * ArgoCD
+  * Trivy
+  * Harbor (optional)
+  * OPA Gatekeeper
+
+###  Week 2: Create and Containerize a Microservice
+
+* Write a simple app in Node.js, Python, or Go
+* Create `Dockerfile`, `Makefile`, and `Helm chart`
+* Push to GitHub
+
+###  Week 3: CI/CD Workflow with Security
+
+* Configure GitHub Actions to:
+
+  * Lint code
+  * Run tests
+  * Scan code with CodeQL/Sonar
+  * Scan container with Trivy
+* Enforce fail on high vulnerabilities
+
+###  Week 4: GitOps Deployment with ArgoCD
+
+* Install ArgoCD
+* Sync Helm chart repo to ArgoCD
+* Automate promotion to staging/prod
+* Add OPA Gatekeeper or Kyverno policies (e.g., no privileged pods)
+
+###  Week 5+: Advanced Hardening
+
+* Sign container images with cosign
+* Enable runtime security (Falco)
+* Add alerting to Slack or email
+* Create audit logs with Fluent Bit
+
+---
+
+##  Learning Outcomes
+
+* CI/CD automation with security gates
+* Secure image builds and registries
+* GitOps with security policy enforcement
+* Runtime threat detection
+
+---
